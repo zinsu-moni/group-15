@@ -14,31 +14,6 @@ InputHandler::InputHandler() {
 InputHandler::~InputHandler() {
 }
 
-// Helper function for validated numeric input
-template<typename T>
-T InputHandler::getValidatedNumber(const std::string& prompt, 
-                                   const std::string& invalidInputMsg,
-                                   const std::string& invalidValueMsg,
-                                   std::function<bool(T)> validatorFunc) const {
-    T input;
-    while (true) {
-        std::cout << prompt;
-        if (std::cin >> input) {
-            if (validatorFunc(input)) {
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                return input;
-            } else {
-                std::cout << invalidValueMsg << std::endl;
-            }
-        } else {
-            std::cout << invalidInputMsg << std::endl;
-        }
-        
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
-}
-
 // Methods to get validated input
 std::string InputHandler::getValidatedName(const std::string& prompt) const {
     std::string input;
